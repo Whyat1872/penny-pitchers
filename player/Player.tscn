@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://player/sprites/guy.png" type="Texture" id=1]
+[ext_resource path="res://player/Player.gd" type="Script" id=2]
+[ext_resource path="res://player/HeadStack.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/Aimer.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 8, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadStack:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "running"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Rect2( 8, 0, 8, 8 ), Rect2( 0, 0, 8, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeadStack:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -4 ) ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 2 )
+anims/running = SubResource( 3 )
+
+[node name="HeadStack" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -4 )
+
+[node name="Aimer" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 6 )
