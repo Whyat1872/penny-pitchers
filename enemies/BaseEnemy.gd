@@ -20,15 +20,17 @@ func _process(delta):
 
 	global_position += velocity * speed * delta
 
-func _exit_tree():
+func death():
 	var dropped_loot = coin_drop.instance()
 	dropped_loot.position = get_global_position()
-	get_tree().get_root().add_child(dropped_loot)
+	get_tree().get_root().get_node("World").call_deferred("add_child", dropped_loot)
 
 func _on_body_entered(body):
+	print(body.name)
 	if body.is_in_group("player"):
 		get_tree().reload_current_scene()
 	elif body.is_in_group("projectile"):
 		if body.linear_velocity.length() >= kill_speed:
 			body.queue_free()
+			death()
 			queue_free()

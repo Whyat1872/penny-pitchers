@@ -10,6 +10,7 @@ radius = 8.0
 "projectile",
 ]]
 collision_layer = 2
+collision_mask = 2147483649
 gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true

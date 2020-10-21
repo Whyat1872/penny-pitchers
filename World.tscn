@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://interactables/money/CollectableCoin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://enemies/BaseEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://EnemySpawnArea.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 576, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 360 )
+extents = Vector2( 360, 32 )
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -56, -56, 0, 0, 0, 0, 1080, -56, 0, 0, 0, 0, 1080, 656, 0, 0, 0, 0, -56, 656, 0, 0, 0, 0, -56, -56 )
+}
 
 [node name="World" type="Node"]
 
@@ -59,22 +64,11 @@ position = Vector2( 824, 280 )
 [node name="CollectableCoin14" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 880, 296 )
 
-[node name="BaseEnemy" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 40, 40 )
-
-[node name="BaseEnemy2" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 976, 40 )
-
-[node name="BaseEnemy3" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 40, 552 )
-
-[node name="BaseEnemy4" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 976, 552 )
-
 [node name="WorldBounds" type="Node" parent="."]
 
 [node name="Top" type="StaticBody2D" parent="WorldBounds"]
 position = Vector2( 512, -24 )
+rotation = -3.14159
 __meta__ = {
 "_edit_group_": true
 }
@@ -83,6 +77,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Top"]
+show_behind_parent = true
 margin_left = -576.0
 margin_top = -32.0
 margin_right = 576.0
@@ -102,6 +97,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="WorldBounds/Bottom"]
+show_behind_parent = true
 margin_left = -576.0
 margin_top = -32.0
 margin_right = 576.0
@@ -113,6 +109,7 @@ __meta__ = {
 
 [node name="Left" type="StaticBody2D" parent="WorldBounds"]
 position = Vector2( -24, 296 )
+rotation = 1.5708
 __meta__ = {
 "_edit_group_": true
 }
@@ -121,10 +118,11 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="ColorRect3" type="ColorRect" parent="WorldBounds/Left"]
-margin_left = -32.0
-margin_top = -360.0
-margin_right = 32.0
-margin_bottom = 360.0
+show_behind_parent = true
+margin_left = -361.0
+margin_top = -32.0
+margin_right = 360.0
+margin_bottom = 32.0
 color = Color( 0.14902, 0.172549, 0.231373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -132,6 +130,7 @@ __meta__ = {
 
 [node name="Right" type="StaticBody2D" parent="WorldBounds"]
 position = Vector2( 1048, 304 )
+rotation = -1.5708
 __meta__ = {
 "_edit_group_": true
 }
@@ -140,11 +139,25 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="ColorRect4" type="ColorRect" parent="WorldBounds/Right"]
-margin_left = -32.0
-margin_top = -360.0
-margin_right = 32.0
-margin_bottom = 360.0
+show_behind_parent = true
+margin_left = -360.0
+margin_top = -32.0
+margin_right = 360.0
+margin_bottom = 32.0
 color = Color( 0.14902, 0.172549, 0.231373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="EnemySpawnArea" type="Path2D" parent="."]
+curve = SubResource( 3 )
+script = ExtResource( 4 )
+
+[node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
+position = Vector2( -56, -56 )
+rotation = 9.75007e-07
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawnArea"]
+wait_time = 2.0
+autostart = true
+[connection signal="timeout" from="EnemySpawnArea/SpawnTimer" to="EnemySpawnArea" method="_on_SpawnTimer_timeout"]
