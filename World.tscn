@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://interactables/money/CollectableCoin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/BaseEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 576, 32 )
@@ -16,54 +17,64 @@ extents = Vector2( 32, 360 )
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 512, 256 )
 
-[node name="Collectables" type="Node" parent="YSort"]
-
-[node name="CollectableCoin" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 688, 424 )
 
-[node name="CollectableCoin2" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin2" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 320, 296 )
 
-[node name="CollectableCoin3" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin3" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 536, 176 )
 
-[node name="CollectableCoin4" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin4" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 744, 72 )
 
-[node name="CollectableCoin5" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin5" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 248, 64 )
 
-[node name="CollectableCoin6" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin6" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 56, 184 )
 
-[node name="CollectableCoin7" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin7" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 128, 536 )
 
-[node name="CollectableCoin8" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin8" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 392, 480 )
 
-[node name="CollectableCoin9" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin9" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 960, 520 )
 
-[node name="CollectableCoin10" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin10" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 856, 252 )
 
-[node name="CollectableCoin11" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin11" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 888, 236 )
 
-[node name="CollectableCoin12" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin12" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 832, 224 )
 
-[node name="CollectableCoin13" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin13" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 824, 280 )
 
-[node name="CollectableCoin14" parent="YSort/Collectables" instance=ExtResource( 2 )]
+[node name="CollectableCoin14" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 880, 296 )
+
+[node name="BaseEnemy" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 40, 40 )
+
+[node name="BaseEnemy2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 976, 40 )
+
+[node name="BaseEnemy3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 40, 552 )
+
+[node name="BaseEnemy4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 976, 552 )
 
 [node name="WorldBounds" type="Node" parent="."]
 
 [node name="Top" type="StaticBody2D" parent="WorldBounds"]
-position = Vector2( 512, -16 )
+position = Vector2( 512, -24 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -71,8 +82,18 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Top"]
 shape = SubResource( 1 )
 
+[node name="ColorRect" type="ColorRect" parent="WorldBounds/Top"]
+margin_left = -576.0
+margin_top = -32.0
+margin_right = 576.0
+margin_bottom = 32.0
+color = Color( 0.14902, 0.172549, 0.231373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Bottom" type="StaticBody2D" parent="WorldBounds"]
-position = Vector2( 512, 616 )
+position = Vector2( 512, 624 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -80,8 +101,18 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Bottom"]
 shape = SubResource( 1 )
 
+[node name="ColorRect2" type="ColorRect" parent="WorldBounds/Bottom"]
+margin_left = -576.0
+margin_top = -32.0
+margin_right = 576.0
+margin_bottom = 32.0
+color = Color( 0.14902, 0.172549, 0.231373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Left" type="StaticBody2D" parent="WorldBounds"]
-position = Vector2( -16, 296 )
+position = Vector2( -24, 296 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -89,11 +120,31 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Left"]
 shape = SubResource( 2 )
 
+[node name="ColorRect3" type="ColorRect" parent="WorldBounds/Left"]
+margin_left = -32.0
+margin_top = -360.0
+margin_right = 32.0
+margin_bottom = 360.0
+color = Color( 0.14902, 0.172549, 0.231373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Right" type="StaticBody2D" parent="WorldBounds"]
-position = Vector2( 1040, 304 )
+position = Vector2( 1048, 304 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Right"]
 shape = SubResource( 2 )
+
+[node name="ColorRect4" type="ColorRect" parent="WorldBounds/Right"]
+margin_left = -32.0
+margin_top = -360.0
+margin_right = 32.0
+margin_bottom = 360.0
+color = Color( 0.14902, 0.172549, 0.231373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

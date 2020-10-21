@@ -9,7 +9,11 @@ radius = 8.0
 [node name="BaseProjectile" type="RigidBody2D" groups=[
 "projectile",
 ]]
-collision_layer = 0
+collision_layer = 2
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 3.0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

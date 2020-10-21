@@ -4,8 +4,4 @@
 [ext_resource path="res://player/projectiles/ProjectileCoin.gd" type="Script" id=2]
 
 [node name="ProjectileCoin" instance=ExtResource( 1 )]
-gravity_scale = 0.0
-contacts_reported = 1
-contact_monitor = true
-linear_damp = 5.0
 script = ExtResource( 2 )

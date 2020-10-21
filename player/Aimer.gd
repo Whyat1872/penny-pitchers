@@ -7,6 +7,8 @@ var projectile_speed = 1000
 var fire_rate = 0.25
 var can_fire = true
 
+var deadly_speed_min = Vector2(-500, -500)
+
 func _process(delta):
 	look_at(get_global_mouse_position())
 	if Input.is_action_pressed("shoot") and can_fire:

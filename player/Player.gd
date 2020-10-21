@@ -7,6 +7,10 @@ onready var head_stack = $HeadStack
 
 var current_coins = 0
 
+func _input(_event):
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
+
 func _physics_process(delta):
 	var direction = Vector2()
 	if Input.is_action_pressed("ui_up"):
