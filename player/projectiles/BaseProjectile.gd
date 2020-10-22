@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+var can_kill = true
+
 func _physics_process(delta):
 	$Sprite.set_global_rotation(0)
 

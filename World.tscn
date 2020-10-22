@@ -31,39 +31,6 @@ position = Vector2( 320, 296 )
 [node name="CollectableCoin3" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 536, 176 )
 
-[node name="CollectableCoin4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 744, 72 )
-
-[node name="CollectableCoin5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 248, 64 )
-
-[node name="CollectableCoin6" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 56, 184 )
-
-[node name="CollectableCoin7" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 128, 536 )
-
-[node name="CollectableCoin8" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 392, 480 )
-
-[node name="CollectableCoin9" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 960, 520 )
-
-[node name="CollectableCoin10" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 856, 252 )
-
-[node name="CollectableCoin11" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 888, 236 )
-
-[node name="CollectableCoin12" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 832, 224 )
-
-[node name="CollectableCoin13" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 824, 280 )
-
-[node name="CollectableCoin14" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 880, 296 )
-
 [node name="WorldBounds" type="Node" parent="."]
 
 [node name="Top" type="StaticBody2D" parent="WorldBounds"]

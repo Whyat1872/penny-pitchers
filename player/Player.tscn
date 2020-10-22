@@ -74,7 +74,7 @@ script = ExtResource( 2 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 8, 8 )
+region_rect = Rect2( 8, 0, 8, 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -84,7 +84,7 @@ anims/idle = SubResource( 2 )
 anims/running = SubResource( 3 )
 
 [node name="HeadStack" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -8 )
 
 [node name="Aimer" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 6 )

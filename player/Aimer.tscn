@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://interactables/money/sprites/regularcoin.png" type="Texture" id=1]
+[ext_resource path="res://player/sprites/aimerreticle.png" type="Texture" id=1]
 [ext_resource path="res://player/Aimer.gd" type="Script" id=2]
 
 [node name="Aimer" type="Position2D"]
@@ -8,4 +8,6 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 32, 0 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
+offset = Vector2( 0.5, -0.5 )
