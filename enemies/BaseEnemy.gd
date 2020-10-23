@@ -38,17 +38,18 @@ func death():
 			dropped_loot.position = get_global_position() + drop_offset()
 		else:
 			dropped_loot.position = get_global_position()
-		get_tree().get_root().get_node("World").call_deferred("add_child", dropped_loot)
+		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
 		i += 1
 
 func drop_offset():
-	var rand_numbers = []
-	var rand_gen = RandomNumberGenerator.new()
-	for i in range(0, 2):
-		rand_gen.randomize()
-		var new_number = rand_gen.randf_range(-16.0, 16.0)
-		rand_numbers.append(new_number)
-	return Vector2(rand_numbers[0], rand_numbers[1])
+	var new_gen = RandomNumberGenerator.new()
+	new_gen.randomize()
+	var rand_angle = new_gen.randf_range(0, 359) # get random angle in radians
+	var rand_radius = new_gen.randi_range(0, $CollisionShape2D.shape.radius)
+	var coordinates = Vector2(cos(rand_angle), sin(rand_angle)) # find x and y vertices
+	var spawn_pos = coordinates * rand_radius
+	
+	return spawn_pos
 
 func _on_body_entered(body):
 	print(body.name)

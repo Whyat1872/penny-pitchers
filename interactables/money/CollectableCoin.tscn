@@ -4,4 +4,5 @@
 [ext_resource path="res://interactables/money/CollectableCoin.gd" type="Script" id=2]
 
 [node name="CollectableCoin" instance=ExtResource( 1 )]
+z_index = -1
 script = ExtResource( 2 )
