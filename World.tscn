@@ -1,8 +1,40 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://interactables/money/CollectableCoin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/enviro_tilemap.png" type="Texture" id=3]
 [ext_resource path="res://EnemySpawnArea.gd" type="Script" id=4]
+[ext_resource path="res://system/WorldBounds.gd" type="Script" id=5]
+
+[sub_resource type="TileSet" id=4]
+0/name = "grass"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 8, 8 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "wall"
+1/texture = ExtResource( 3 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 8, 0, 8, 8 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 576, 32 )
@@ -17,23 +49,30 @@ _data = {
 
 [node name="World" type="Node"]
 
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+z_index = -1
+tile_set = SubResource( 4 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 1, 0, 27, 1, 0, 28, 1, 0, 29, 1, 0, 30, 1, 0, 31, 1, 0, 65547, 0, 0, 65548, 0, 0, 65555, 0, 0, 65556, 0, 0, 65557, 0, 0, 65559, 0, 0, 65560, 0, 0, 196610, 0, 0, 196613, 0, 0, 196614, 0, 0, 262147, 0, 0, 262149, 0, 0, 262151, 0, 0, 262161, 0, 0, 262172, 0, 0, 327685, 0, 0, 327686, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393237, 0, 0, 393241, 0, 0, 458756, 0, 0, 458778, 0, 0, 524316, 0, 0, 720906, 0, 0, 720918, 0, 0, 720919, 0, 0, 720920, 0, 0, 786436, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 851983, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 917510, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917533, 0, 0, 983047, 0, 0, 1048604, 0, 0, 1114124, 0, 0, 1114136, 0, 0, 1114142, 0, 0, 1179650, 0, 0, 1179654, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179670, 0, 0 )
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 512, 256 )
+position = Vector2( 512, 272 )
 
 [node name="Items" type="Node" parent="."]
 
 [node name="CollectableCoin" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 688, 424 )
+position = Vector2( 672, 408 )
 
 [node name="CollectableCoin2" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 320, 296 )
-
-[node name="CollectableCoin3" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 536, 176 )
+position = Vector2( 352, 192 )
 
 [node name="WorldBounds" type="Node" parent="."]
+script = ExtResource( 5 )
+border_color = Color( 0.513726, 0.462745, 0.611765, 1 )
 
 [node name="Top" type="StaticBody2D" parent="WorldBounds"]
 position = Vector2( 512, -24 )
@@ -48,9 +87,9 @@ shape = SubResource( 1 )
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Top"]
 show_behind_parent = true
 margin_left = -576.0
-margin_top = -32.0
+margin_top = -28.0
 margin_right = 576.0
-margin_bottom = 32.0
+margin_bottom = 36.0
 color = Color( 0.14902, 0.172549, 0.231373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,12 +104,12 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Bottom"]
 shape = SubResource( 1 )
 
-[node name="ColorRect2" type="ColorRect" parent="WorldBounds/Bottom"]
+[node name="ColorRect" type="ColorRect" parent="WorldBounds/Bottom"]
 show_behind_parent = true
 margin_left = -576.0
-margin_top = -32.0
+margin_top = -28.0
 margin_right = 576.0
-margin_bottom = 32.0
+margin_bottom = 36.0
 color = Color( 0.14902, 0.172549, 0.231373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -86,12 +125,12 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Left"]
 shape = SubResource( 2 )
 
-[node name="ColorRect3" type="ColorRect" parent="WorldBounds/Left"]
+[node name="ColorRect" type="ColorRect" parent="WorldBounds/Left"]
 show_behind_parent = true
 margin_left = -361.0
-margin_top = -32.0
+margin_top = -28.0
 margin_right = 360.0
-margin_bottom = 32.0
+margin_bottom = 36.0
 color = Color( 0.14902, 0.172549, 0.231373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -107,12 +146,12 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Right"]
 shape = SubResource( 2 )
 
-[node name="ColorRect4" type="ColorRect" parent="WorldBounds/Right"]
+[node name="ColorRect" type="ColorRect" parent="WorldBounds/Right"]
 show_behind_parent = true
 margin_left = -360.0
-margin_top = -32.0
+margin_top = -28.0
 margin_right = 360.0
-margin_bottom = 32.0
+margin_bottom = 36.0
 color = Color( 0.14902, 0.172549, 0.231373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -121,7 +160,6 @@ __meta__ = {
 [node name="EnemySpawnArea" type="Path2D" parent="."]
 curve = SubResource( 3 )
 script = ExtResource( 4 )
-boss_interval = 1
 
 [node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
 position = Vector2( -56, -56 )
@@ -130,4 +168,6 @@ rotation = 9.75007e-07
 [node name="SpawnTimer" type="Timer" parent="EnemySpawnArea"]
 wait_time = 2.0
 autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
 [connection signal="timeout" from="EnemySpawnArea/SpawnTimer" to="EnemySpawnArea" method="_on_SpawnTimer_timeout"]
