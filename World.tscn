@@ -60,15 +60,15 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 512, 272 )
+position = Vector2( 512, 320 )
 
 [node name="Items" type="Node" parent="."]
 
 [node name="CollectableCoin" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 672, 408 )
+position = Vector2( 576, 320 )
 
 [node name="CollectableCoin2" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 352, 192 )
+position = Vector2( 448, 320 )
 
 [node name="WorldBounds" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -160,6 +160,7 @@ __meta__ = {
 [node name="EnemySpawnArea" type="Path2D" parent="."]
 curve = SubResource( 3 )
 script = ExtResource( 4 )
+boss_interval = 5
 
 [node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
 position = Vector2( -56, -56 )

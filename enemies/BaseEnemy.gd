@@ -1,6 +1,7 @@
 extends Area2D
 
-onready var anim_player = $AnimationPlayer
+onready var anims_player = $AnimationsPlayer
+onready var fx_player = $EffectsPlayer
 
 export var kill_speed = 200
 
@@ -13,13 +14,15 @@ var velocity = Vector2()
 export var max_health = 1
 export var is_boss = false
 var current_health
+var invincible = false
 
 func _ready():
 	print(int(is_boss))
 	current_health = max_health
 	speed = rand_range(90, 200)
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
-	anim_player.play("moving")
+	anims_player.play("moving")
+	fx_player.play("okay")
 
 func _process(delta):
 	velocity = global_position.direction_to(player_ref.global_position)
@@ -55,7 +58,7 @@ func _on_body_entered(body):
 	print(body.name)
 	if body.is_in_group("player"):
 		get_tree().reload_current_scene()
-	elif body.is_in_group("projectile") and body.can_kill == true:
+	elif body.is_in_group("projectile") and body.can_kill == true and !invincible:
 		if body.linear_velocity.length() >= kill_speed:
 			current_health -= 1
 			body.can_kill = false
@@ -63,3 +66,9 @@ func _on_body_entered(body):
 			if current_health <= 0:
 				death()
 				queue_free()
+			else:
+				invincible = true
+				fx_player.play("hurt")
+				yield(get_tree().create_timer(fx_player.current_animation_length),"timeout")
+				invincible = false
+				fx_player.play("okay")
