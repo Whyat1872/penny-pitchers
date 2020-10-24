@@ -9,8 +9,8 @@ radius = 32.0
 [node name="BossGuy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 kill_speed = 300
+speed = 50
 max_health = 2
-is_boss = true
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 12, 12 )

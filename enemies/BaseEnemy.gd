@@ -8,16 +8,16 @@ export var kill_speed = 200
 var player_ref 
 var coin_drop = preload("res://interactables/money/CollectableCoin.tscn")
 
-var speed = 100
+export var speed = 100
+var base_speed = 100
 var velocity = Vector2()
 
 export var max_health = 1
-export var is_boss = false
 var current_health
 var invincible = false
 
 func _ready():
-	print(int(is_boss))
+#	print(int(is_boss))
 	current_health = max_health
 	speed = rand_range(90, 200)
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
@@ -35,12 +35,9 @@ func _process(delta):
 	global_position += velocity * speed * delta
 
 func death():
-	for i in range(0, max_health + int(is_boss)):
+	for i in range(0, max_health):
 		var dropped_loot = coin_drop.instance()
-		if is_boss:
-			dropped_loot.position = get_global_position() + drop_offset()
-		else:
-			dropped_loot.position = get_global_position()
+		dropped_loot.position = get_global_position()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
 		i += 1
 
@@ -55,7 +52,7 @@ func drop_offset():
 	return spawn_pos
 
 func _on_body_entered(body):
-	print(body.name)
+#	print(body.name)
 	if body.is_in_group("player"):
 		get_tree().reload_current_scene()
 	elif body.is_in_group("projectile") and body.can_kill == true and !invincible:

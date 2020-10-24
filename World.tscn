@@ -84,6 +84,12 @@ position = Vector2( 576, 320 )
 [node name="CollectableCoin2" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 448, 320 )
 
+[node name="CollectableCoin3" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 512, 256 )
+
+[node name="CollectableCoin4" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 512, 384 )
+
 [node name="WorldBounds" type="Node" parent="."]
 script = ExtResource( 5 )
 border_color = Color( 0.513726, 0.462745, 0.611765, 1 )
@@ -174,7 +180,6 @@ __meta__ = {
 [node name="EnemySpawnArea" type="Path2D" parent="."]
 curve = SubResource( 4 )
 script = ExtResource( 4 )
-boss_interval = 5
 
 [node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
 position = Vector2( -56, -56 )
