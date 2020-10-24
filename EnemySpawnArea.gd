@@ -1,7 +1,5 @@
 extends Path2D
 
-signal enemy_spawned
-
 onready var badguy = preload("res://enemies/BadGuy.tscn")
 onready var bossguy = preload("res://enemies/BossGuy.tscn")
 onready var armorguy = preload("res://enemies/ArmorGuy.tscn")
@@ -20,7 +18,6 @@ var spawned_enemies = 0
 var spawn_intervals
 
 func _ready():
-	connect("enemy_spawned", get_parent().get_node("HUD"), "update_enemy_count")
 	spawn_intervals = [badguy_interval, bossguy_interval, armorguy_interval, ghostguy_interval, slimeguy_interval]
 
 func _on_SpawnTimer_timeout():
@@ -48,9 +45,9 @@ func _on_SpawnTimer_timeout():
 	if mob != null:
 		$EnemySpawnSpot.offset = randi()
 		get_tree().get_root().get_node("World/YSort").add_child(mob)
-		var direction = $EnemySpawnSpot.rotation + PI / 2
+#		var direction = $EnemySpawnSpot.rotation + PI / 2
 		mob.position = $EnemySpawnSpot.position
-		direction += rand_range(-PI / 4, PI / 4)
+#		direction += rand_range(-PI / 4, PI / 4)
 	
 func calculate_spawn(index):
 	match spawned_enemies % index:

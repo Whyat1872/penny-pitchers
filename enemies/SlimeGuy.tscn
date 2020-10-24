@@ -8,6 +8,7 @@
 script = ExtResource( 2 )
 speed = 25
 max_health = 3
+loot_count = 5
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )

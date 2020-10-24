@@ -15,6 +15,7 @@ var base_speed = 100
 var velocity = Vector2()
 
 export var max_health = 1
+export var loot_count = 1
 var current_health
 var invincible = false
 
@@ -37,9 +38,9 @@ func _process(delta):
 	global_position += velocity * speed * delta
 
 func death():
-	for i in range(0, max_health):
+	for i in range(0, loot_count):
 		var dropped_loot = coin_drop.instance()
-		dropped_loot.position = get_global_position()
+		dropped_loot.position = get_global_position() + drop_offset()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
 		i += 1
 	emit_signal("on_death")

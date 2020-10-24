@@ -27,6 +27,7 @@ max_health = 2
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+region_rect = Rect2( 0, 8, 8, 8 )
 
 [node name="AnimationsPlayer" parent="." index="2"]
 anims/moving_no_armor = SubResource( 1 )
