@@ -1,5 +1,7 @@
 extends Area2D
 
+signal on_death
+
 onready var anims_player = $AnimationsPlayer
 onready var fx_player = $EffectsPlayer
 
@@ -17,7 +19,7 @@ var current_health
 var invincible = false
 
 func _ready():
-#	print(int(is_boss))
+	connect("on_death", get_tree().get_root().get_node("World/HUD"), "update_kill_count")
 	current_health = max_health
 	speed = rand_range(90, 200)
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
@@ -40,6 +42,7 @@ func death():
 		dropped_loot.position = get_global_position()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
 		i += 1
+	emit_signal("on_death")
 
 func drop_offset():
 	var new_gen = RandomNumberGenerator.new()

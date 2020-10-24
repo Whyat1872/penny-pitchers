@@ -1,10 +1,12 @@
 extends Path2D
 
+signal enemy_spawned
+
 onready var badguy = preload("res://enemies/BadGuy.tscn")
 onready var bossguy = preload("res://enemies/BossGuy.tscn")
 onready var armorguy = preload("res://enemies/ArmorGuy.tscn")
-onready var ghostguy = preload("res://enemies/sprites/ghostguy.png")
-onready var slimeguy = preload("res://enemies/sprites/slimeguy.png")
+onready var ghostguy = preload("res://enemies/GhostGuy.tscn")
+onready var slimeguy = preload("res://enemies/SlimeGuy.tscn")
 
 onready var spawn_timer = $SpawnTimer
 
@@ -18,11 +20,11 @@ var spawned_enemies = 0
 var spawn_intervals
 
 func _ready():
+	connect("enemy_spawned", get_parent().get_node("HUD"), "update_enemy_count")
 	spawn_intervals = [badguy_interval, bossguy_interval, armorguy_interval, ghostguy_interval, slimeguy_interval]
 
 func _on_SpawnTimer_timeout():
 	spawned_enemies += 1
-	print("spawned enemies: %s" % spawned_enemies)
 	var mob
 	for i in spawn_intervals:
 		match spawned_enemies % i:
@@ -30,19 +32,19 @@ func _on_SpawnTimer_timeout():
 				match i: # top: least frequent, bottom: most frequent
 					bossguy_interval:
 						mob = bossguy.instance()
-						print("spawned bossguy")
+#						print("spawned bossguy")
 					ghostguy_interval:
 						mob = ghostguy.instance()
-						print("spawned ghostguy")
+#						print("spawned ghostguy")
 					slimeguy_interval:
 						mob = slimeguy.instance()
-						print("spawned slimeguy")
+#						print("spawned slimeguy")
 					armorguy_interval:
 						mob = armorguy.instance()
-						print("spawned armorguy")
+#						print("spawned armorguy")
 					badguy_interval:
 						mob = badguy.instance()
-						print("spawned badguy")
+#						print("spawned badguy")
 	if mob != null:
 		$EnemySpawnSpot.offset = randi()
 		get_tree().get_root().get_node("World/YSort").add_child(mob)
