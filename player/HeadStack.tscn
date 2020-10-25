@@ -4,4 +4,3 @@
 
 [node name="HeadStack" type="Position2D"]
 script = ExtResource( 1 )
-head_coins = [ null, null, null ]

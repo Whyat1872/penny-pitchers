@@ -37,6 +37,14 @@ func _process(delta):
 
 	global_position += velocity * speed * delta
 
+func hurt():
+	if self.is_in_group("armored"):
+		anims_player.play("moving_no_armor")
+	var dropped_loot = coin_drop.instance()
+	dropped_loot.position = get_global_position() + drop_offset()
+	get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
+	loot_count -= 1
+
 func death():
 	for i in range(0, loot_count):
 		var dropped_loot = coin_drop.instance()
@@ -69,6 +77,8 @@ func _on_body_entered(body):
 				queue_free()
 			else:
 				invincible = true
+				hurt()
+				$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
 				fx_player.play("hurt")
 				yield(get_tree().create_timer(fx_player.current_animation_length),"timeout")
 				invincible = false

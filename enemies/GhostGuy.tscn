@@ -9,3 +9,7 @@ script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+region_rect = Rect2( 8, 0, 8, 8 )
+
+[node name="EnemyHeadstack" parent="." index="2"]
+position = Vector2( 0, -8 )
