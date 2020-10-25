@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+export var value = 1
+
 var can_kill = true
 
 func _physics_process(delta):

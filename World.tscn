@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://interactables/money/CollectableCoin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player/projectiles/CopperProjectile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/enviro_tilemap.png" type="Texture" id=3]
 [ext_resource path="res://EnemySpawnArea.gd" type="Script" id=4]
 [ext_resource path="res://system/WorldBounds.gd" type="Script" id=5]
@@ -80,17 +80,17 @@ position = Vector2( 512, 320 )
 
 [node name="Items" type="Node" parent="."]
 
-[node name="CollectableCoin" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 576, 320 )
-
-[node name="CollectableCoin2" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 448, 320 )
-
-[node name="CollectableCoin3" parent="Items" instance=ExtResource( 2 )]
+[node name="CopperProjectile" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 512, 256 )
 
-[node name="CollectableCoin4" parent="Items" instance=ExtResource( 2 )]
+[node name="CopperProjectile2" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 512, 384 )
+
+[node name="CopperProjectile3" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 576, 320 )
+
+[node name="CopperProjectile4" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 448, 320 )
 
 [node name="WorldBounds" type="Node" parent="."]
 script = ExtResource( 5 )

@@ -4,11 +4,11 @@
 [ext_resource path="res://interactables/money/CollectableCoin.gd" type="Script" id=2]
 [ext_resource path="res://interactables/money/sprites/coins.png" type="Texture" id=3]
 
-[node name="CollectableCoin" instance=ExtResource( 1 )]
-z_index = -1
+[node name="GoldCoin" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+value = 5
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 8, 8 )
+region_rect = Rect2( 16, 0, 8, 8 )

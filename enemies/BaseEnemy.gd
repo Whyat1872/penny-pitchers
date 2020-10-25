@@ -8,7 +8,7 @@ onready var fx_player = $EffectsPlayer
 export var kill_speed = 200
 
 var player_ref 
-var coin_drop = preload("res://interactables/money/CollectableCoin.tscn")
+var coin_drop = preload("res://player/projectiles/CopperProjectile.tscn")
 
 export var speed = 100
 var base_speed = 100
@@ -61,7 +61,7 @@ func _on_body_entered(body):
 		get_tree().reload_current_scene()
 	elif body.is_in_group("projectile") and body.can_kill == true and !invincible:
 		if body.linear_velocity.length() >= kill_speed:
-			current_health -= 1
+			current_health -= body.value
 			body.can_kill = false
 			body.queue_free()
 			if current_health <= 0:
