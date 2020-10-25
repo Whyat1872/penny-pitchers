@@ -5,6 +5,8 @@ signal on_death
 onready var anims_player = $AnimationsPlayer
 onready var fx_player = $EffectsPlayer
 
+onready var enemy_headstack = $EnemyHeadstack
+
 export var kill_speed = 200
 
 var player_ref 
@@ -67,11 +69,16 @@ func drop_offset():
 	
 	return spawn_pos
 
+func add_coin(value):
+	current_health += value
+	enemy_headstack.update_coin_count(value)
+	enemy_headstack.coin_count = current_health
+
 func _on_body_entered(body):
 #	print(body.name)
 	if body.is_in_group("player"):
 		if body.can_interact:
-			body.player_hit()
+			body.player_hit("enemy")
 	elif body.is_in_group("projectile") and body.can_kill == true and !invincible:
 		if body.linear_velocity.length() >= kill_speed:
 			current_health -= body.value
@@ -87,3 +94,6 @@ func _on_body_entered(body):
 				yield(get_tree().create_timer(fx_player.current_animation_length),"timeout")
 				invincible = false
 				fx_player.play("okay")
+		else:
+			add_coin(body.value)
+			body.queue_free()

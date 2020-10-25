@@ -84,16 +84,10 @@ position = Vector2( 512, 320 )
 [node name="Items" type="Node" parent="."]
 
 [node name="CopperProjectile" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 512, 320 )
-
-[node name="CopperProjectile2" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 576, 448 )
-
-[node name="CopperProjectile3" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 640, 192 )
+position = Vector2( 576, 320 )
 
 [node name="CopperProjectile4" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 384, 320 )
+position = Vector2( 448, 320 )
 
 [node name="WorldBounds" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -185,10 +179,6 @@ __meta__ = {
 [node name="EnemySpawnArea" type="Path2D" parent="."]
 curve = SubResource( 4 )
 script = ExtResource( 4 )
-bossguy_interval = 10
-armorguy_interval = 3
-ghostguy_interval = 5
-slimeguy_interval = 8
 
 [node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
 position = Vector2( -56, -56 )

@@ -4,6 +4,9 @@ var head_coin = preload("res://player/HeadCoin.tscn")
 
 var coin_count setget update_coin_count
 
+func _ready():
+	update_coin_count(get_parent().current_coins)
+
 func update_coin_count(new_count):
 	coin_count = new_count
 	for coin in self.get_children():

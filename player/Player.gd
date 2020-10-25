@@ -8,7 +8,7 @@ onready var anim_player = $AnimsPlayer
 onready var fx_player = $FXAnimPlayer
 onready var head_stack = $HeadStack
 
-var current_coins = 0
+var current_coins = 1
 
 var is_alive = true
 var can_interact = true
@@ -52,8 +52,8 @@ func add_coin(value):
 		head_stack.update_coin_count(value)
 		head_stack.coin_count = current_coins
 
-func player_hit():
-	hurt()
+func player_hit(source):
+	hurt(source)
 	if current_coins <= 0:
 		is_alive = false
 		emit_signal("player_death")
@@ -65,14 +65,17 @@ func player_hit():
 		$CollisionShape2D.set_deferred("disabled", false)
 		fx_player.play("okay")
 
-func hurt():
+func hurt(source):
 	$CollisionShape2D.set_deferred("disabled", true)
 	current_coins -= 1
 	head_stack.update_coin_count(current_coins)
 	can_interact = false
-	var dropped_loot = $Aimer.projectiles[0].instance()
-	dropped_loot.position = get_global_position() + drop_offset()
-	get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
+	if source == "enemy":
+		var dropped_loot = $Aimer.projectiles[0].instance()
+		dropped_loot.position = get_global_position() + drop_offset()
+		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
+	elif source == "shoot":
+		pass
 
 func drop_offset():
 	var new_gen = RandomNumberGenerator.new()
