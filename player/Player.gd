@@ -30,6 +30,7 @@ func _physics_process(delta):
 
 func add_coin(value):
 	current_coins += value
+	head_stack.update_coin_count(value)
 	head_stack.coin_count = current_coins
 
 func animation_handler(current_dir):
