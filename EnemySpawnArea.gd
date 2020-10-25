@@ -20,6 +20,12 @@ var spawn_intervals
 func _ready():
 	spawn_intervals = [badguy_interval, bossguy_interval, armorguy_interval, ghostguy_interval, slimeguy_interval]
 
+func _on_player_death():
+	spawn_timer.stop()
+	print("lol get rekt")
+	yield(get_tree().create_timer(1), "timeout")
+	get_tree().reload_current_scene()
+
 func _on_SpawnTimer_timeout():
 	spawned_enemies += 1
 	var mob
@@ -49,7 +55,3 @@ func _on_SpawnTimer_timeout():
 		mob.position = $EnemySpawnSpot.position
 #		direction += rand_range(-PI / 4, PI / 4)
 	
-func calculate_spawn(index):
-	match spawned_enemies % index:
-		0:
-			pass

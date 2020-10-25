@@ -15,6 +15,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed("shoot") and can_fire:
 		if player_ref.current_coins > 0:
+			player_ref.get_node("InteractAudio2D").play_audio("shoot")
 			player_ref.add_coin(-1)
 			var new_projectile = projectiles[0].instance()
 			new_projectile.position = $Sprite.get_global_position()

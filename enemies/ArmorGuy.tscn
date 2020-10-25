@@ -41,10 +41,6 @@ max_health = 2
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 8, 8, 8 )
-
-[node name="EnemyHeadstack" parent="." index="2"]
-position = Vector2( 0, -4 )
 
 [node name="AnimationsPlayer" parent="." index="3"]
 anims/moving_no_armor = SubResource( 1 )

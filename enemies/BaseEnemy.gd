@@ -26,6 +26,7 @@ func _ready():
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
 	anims_player.play("moving")
 	fx_player.play("okay")
+	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func _process(delta):
 	velocity = global_position.direction_to(player_ref.global_position)
@@ -39,11 +40,14 @@ func _process(delta):
 
 func hurt():
 	if self.is_in_group("armored"):
+		var anim_position = anims_player.get_current_animation_position()
 		anims_player.play("moving_no_armor")
+		anims_player.seek(anim_position, true)
 	var dropped_loot = coin_drop.instance()
 	dropped_loot.position = get_global_position() + drop_offset()
 	get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
-	loot_count -= 1
+	$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
+	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func death():
 	for i in range(0, loot_count):
@@ -66,7 +70,8 @@ func drop_offset():
 func _on_body_entered(body):
 #	print(body.name)
 	if body.is_in_group("player"):
-		get_tree().reload_current_scene()
+		if body.can_interact:
+			body.player_hit()
 	elif body.is_in_group("projectile") and body.can_kill == true and !invincible:
 		if body.linear_velocity.length() >= kill_speed:
 			current_health -= body.value
@@ -78,7 +83,6 @@ func _on_body_entered(body):
 			else:
 				invincible = true
 				hurt()
-				$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
 				fx_player.play("hurt")
 				yield(get_tree().create_timer(fx_player.current_animation_length),"timeout")
 				invincible = false
