@@ -86,6 +86,24 @@ position = Vector2( 512, 320 )
 [node name="CopperProjectile" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 576, 320 )
 
+[node name="CopperProjectile2" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 512, 384 )
+
+[node name="CopperProjectile3" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 512, 256 )
+
+[node name="CopperProjectile5" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 544, 288 )
+
+[node name="CopperProjectile6" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 480, 288 )
+
+[node name="CopperProjectile7" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 544, 352 )
+
+[node name="CopperProjectile8" parent="Items" instance=ExtResource( 2 )]
+position = Vector2( 480, 352 )
+
 [node name="CopperProjectile4" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 448, 320 )
 

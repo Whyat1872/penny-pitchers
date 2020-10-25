@@ -70,9 +70,11 @@ func drop_offset():
 	return spawn_pos
 
 func add_coin(value):
+	$InteractAudio2D.play_audio("pickup")
 	current_health += value
 	enemy_headstack.update_coin_count(value)
 	enemy_headstack.coin_count = current_health
+	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func _on_body_entered(body):
 #	print(body.name)
