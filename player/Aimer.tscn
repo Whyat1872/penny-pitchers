@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://interactables/money/sprites/regularcoin.png" type="Texture" id=1]
+[ext_resource path="res://player/sprites/aimerreticle.png" type="Texture" id=1]
 [ext_resource path="res://player/Aimer.gd" type="Script" id=2]
+[ext_resource path="res://player/projectiles/CopperProjectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/projectiles/SilverProjectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/projectiles/GoldProjectile.tscn" type="PackedScene" id=5]
 
 [node name="Aimer" type="Position2D"]
 script = ExtResource( 2 )
+projectiles = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 32, 0 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
+offset = Vector2( 0.5, -0.5 )
