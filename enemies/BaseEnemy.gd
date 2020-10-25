@@ -28,7 +28,6 @@ func _ready():
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
 	anims_player.play("moving")
 	fx_player.play("okay")
-	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func _process(delta):
 	velocity = global_position.direction_to(player_ref.global_position)
@@ -49,7 +48,6 @@ func hurt():
 	dropped_loot.position = get_global_position() + drop_offset()
 	get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
 	$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
-	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func death():
 	for i in range(0, loot_count):
@@ -74,7 +72,6 @@ func add_coin(value):
 	current_health += value
 	enemy_headstack.update_coin_count(value)
 	enemy_headstack.coin_count = current_health
-	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func _on_body_entered(body):
 #	print(body.name)
