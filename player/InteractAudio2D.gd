@@ -12,6 +12,9 @@ func play_audio(interaction):
 		"shoot":
 			file_name = "shoot"
 			file_type = "wav"
+		"low_ammo":
+			file_name = "shoot2"
+			file_type = "wav"
 	var string_path = "res://sound/%s.%s" % [file_name, file_type]
 	self.stream = load(string_path)
 	self.play()

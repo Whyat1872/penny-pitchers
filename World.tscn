@@ -1,57 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/projectiles/CopperProjectile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://environment/enviro_tilemap.png" type="Texture" id=3]
+[ext_resource path="res://system/WorldMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://system/EnemySpawnArea.gd" type="Script" id=4]
 [ext_resource path="res://system/WorldBounds.gd" type="Script" id=5]
 [ext_resource path="res://fonts/base_font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://system/HUD.gd" type="Script" id=7]
 [ext_resource path="res://system/YSort.gd" type="Script" id=8]
-
-[sub_resource type="TileSet" id=1]
-0/name = "grass"
-0/texture = ExtResource( 3 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 8, 8 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "wall"
-1/texture = ExtResource( 3 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 8, 0, 8, 8 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-2/name = "gravel"
-2/texture = ExtResource( 3 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 16, 0, 8, 8 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 576, 32 )
@@ -66,13 +22,7 @@ _data = {
 
 [node name="World" type="Node"]
 
-[node name="TileMap" type="TileMap" parent="."]
-scale = Vector2( 4, 4 )
-z_index = -1
-tile_set = SubResource( 1 )
-cell_size = Vector2( 8, 8 )
-format = 1
-tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 1, 0, 27, 1, 0, 28, 1, 0, 29, 1, 0, 30, 1, 0, 31, 1, 0, 65540, 2, 0, 65541, 2, 0, 65547, 0, 0, 65548, 0, 0, 65552, 2, 0, 65555, 0, 0, 65556, 0, 0, 65557, 0, 0, 65559, 0, 0, 65560, 0, 0, 65565, 2, 0, 65566, 2, 0, 65567, 2, 0, 131102, 2, 0, 131103, 2, 0, 196610, 0, 0, 196613, 0, 0, 196614, 0, 0, 196632, 2, 0, 196639, 2, 0, 262147, 0, 0, 262149, 0, 0, 262151, 0, 0, 262154, 2, 0, 262155, 2, 0, 262161, 0, 0, 262172, 0, 0, 327685, 0, 0, 327686, 0, 0, 327690, 2, 0, 327691, 2, 0, 327692, 2, 0, 327693, 2, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393227, 2, 0, 393228, 2, 0, 393229, 2, 0, 393237, 0, 0, 393241, 0, 0, 458756, 0, 0, 458764, 2, 0, 458765, 2, 0, 458778, 0, 0, 524310, 2, 0, 524316, 0, 0, 589831, 2, 0, 720896, 2, 0, 720906, 0, 0, 720918, 0, 0, 720919, 0, 0, 720920, 0, 0, 786432, 2, 0, 786433, 2, 0, 786436, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 851968, 2, 0, 851969, 2, 0, 851983, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 917505, 2, 0, 917510, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917530, 2, 0, 917533, 0, 0, 983047, 0, 0, 983051, 2, 0, 1048593, 2, 0, 1048604, 0, 0, 1114124, 0, 0, 1114136, 0, 0, 1114142, 0, 0, 1179650, 0, 0, 1179654, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179670, 0, 0 )
+[node name="WorldMap" parent="." instance=ExtResource( 3 )]
 
 [node name="YSort" type="YSort" parent="."]
 z_index = 1
@@ -213,7 +163,9 @@ script = ExtResource( 7 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+margin_left = 384.0
 margin_top = -224.0
+margin_right = -384.0
 margin_bottom = -188.0
 custom_fonts/font = ExtResource( 6 )
 text = "get ready"
