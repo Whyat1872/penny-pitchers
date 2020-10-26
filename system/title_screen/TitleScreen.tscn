@@ -89,3 +89,6 @@ flat = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 512, 320 )
+[connection signal="button_up" from="Menu/MenuVBox/ButtonsVBox/StartButton" to="." method="_on_StartButton_button_up"]
+[connection signal="button_up" from="Menu/MenuVBox/ButtonsVBox/InstructionsButton" to="." method="_on_InstructionsButton_button_up"]
+[connection signal="button_up" from="Menu/MenuVBox/ButtonsVBox/QuitButton" to="." method="_on_QuitButton_button_up"]

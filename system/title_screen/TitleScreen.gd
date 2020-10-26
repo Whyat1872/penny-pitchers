@@ -1,16 +1,15 @@
 extends Node
 
+var main_game_scene = load("res://World.tscn")
+var instructions_scene = load("res://system/instructions_screen/InstructionsScreen.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _on_StartButton_button_up():
+	get_tree().change_scene_to(main_game_scene)
 
+func _on_InstructionsButton_button_up():
+	var new_instructions = instructions_scene.instance()
+	add_child(new_instructions)
+	new_instructions.rect_position = Vector2(352, 160)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_QuitButton_button_up():
+	get_tree().quit()
