@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 onready var main_label = get_node("MainLabel")
+
 var kill_count = 0
 
 func _ready():

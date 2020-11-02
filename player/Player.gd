@@ -8,6 +8,8 @@ onready var anim_player = $AnimsPlayer
 onready var fx_player = $FXAnimPlayer
 onready var head_stack = $HeadStack
 
+onready var interact_audio_player = $InteractAudio2D
+
 var current_coins = 1
 
 var is_alive = true
@@ -47,7 +49,7 @@ func _physics_process(delta):
 func add_coin(value):
 	if can_interact:
 		if !value < 0:
-			$InteractAudio2D.play_audio("pickup")
+			interact_audio_player.play_audio("pickup")
 		current_coins += value
 		head_stack.update_coin_count(value)
 		head_stack.coin_count = current_coins
@@ -56,8 +58,10 @@ func player_hit(source):
 	hurt(source)
 	if current_coins <= 0:
 		is_alive = false
-		emit_signal("player_death")
 		visible = false
+		interact_audio_player.play_audio("death")
+		yield(interact_audio_player, "finished")
+		emit_signal("player_death")
 	else:
 		fx_player.play("hurt")
 		yield(get_tree().create_timer(fx_player.current_animation_length),"timeout")
@@ -71,11 +75,10 @@ func hurt(source):
 	head_stack.update_coin_count(current_coins)
 	can_interact = false
 	if source == "enemy":
+		interact_audio_player.play_audio("hurt")
 		var dropped_loot = $Aimer.projectiles[0].instance()
 		dropped_loot.position = get_global_position() + drop_offset()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
-	elif source == "shoot":
-		pass
 
 func drop_offset():
 	var new_gen = RandomNumberGenerator.new()

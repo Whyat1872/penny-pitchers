@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/projectiles/CopperProjectile.tscn" type="PackedScene" id=2]
@@ -8,14 +8,15 @@
 [ext_resource path="res://fonts/base_font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://system/HUD.gd" type="Script" id=7]
 [ext_resource path="res://system/YSort.gd" type="Script" id=8]
+[ext_resource path="res://sound/KB - Battle in the Sky.ogg" type="AudioStream" id=9]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 576, 32 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 360, 32 )
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="Curve2D" id=3]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -56, -56, 0, 0, 0, 0, 1080, -56, 0, 0, 0, 0, 1080, 656, 0, 0, 0, 0, -56, 656, 0, 0, 0, 0, -56, -56 )
 }
@@ -69,7 +70,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Top"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Top"]
 show_behind_parent = true
@@ -89,7 +90,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Bottom"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Bottom"]
 show_behind_parent = true
@@ -110,7 +111,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Left"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Left"]
 show_behind_parent = true
@@ -131,7 +132,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Right"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Right"]
 show_behind_parent = true
@@ -145,15 +146,16 @@ __meta__ = {
 }
 
 [node name="EnemySpawnArea" type="Path2D" parent="."]
-curve = SubResource( 4 )
+curve = SubResource( 3 )
 script = ExtResource( 4 )
+armorguy_interval = 5
 
 [node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
 position = Vector2( -56, -56 )
 rotation = 9.75007e-07
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawnArea"]
-wait_time = 2.0
+wait_time = 2.5
 autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -174,4 +176,8 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource( 9 )
+autoplay = true
 [connection signal="timeout" from="EnemySpawnArea/SpawnTimer" to="EnemySpawnArea" method="_on_SpawnTimer_timeout"]

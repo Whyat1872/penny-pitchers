@@ -43,15 +43,15 @@ margin_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
-text = "Penny Pitchers"
+text = "Penny Pitcher"
 align = 1
 valign = 1
 
 [node name="ButtonsVBox" type="VBoxContainer" parent="Menu/MenuVBox"]
 margin_left = 134.0
-margin_top = 131.0
+margin_top = 132.0
 margin_right = 250.0
-margin_bottom = 231.0
+margin_bottom = 232.0
 rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 4
 size_flags_vertical = 4

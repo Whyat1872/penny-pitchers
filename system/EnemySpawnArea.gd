@@ -24,7 +24,7 @@ func _on_player_death():
 	spawn_timer.stop()
 	print("lol get rekt")
 	yield(get_tree().create_timer(1), "timeout")
-	get_tree().reload_current_scene()
+	get_tree().change_scene("res://system/title_screen/TitleScreen.tscn")
 
 func _on_SpawnTimer_timeout():
 	spawned_enemies += 1
