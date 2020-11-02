@@ -80,8 +80,9 @@ func add_coin(value):
 
 func temp_disable():
 	set_process(false)
-	yield(get_tree().create_timer(fx_player.current_animation_length), "timeout")
-	set_process(true)
+	yield(get_tree().create_timer(fx_player.current_animation_length + 0.5), "timeout")
+	if player_ref.is_alive:
+		set_process(true)
 
 func _on_body_entered(body):
 #	print(body.name)

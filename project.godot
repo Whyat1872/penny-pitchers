@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Penny Pitchers"
+config/name="Penny Pitcher"
 run/main_scene="res://system/title_screen/TitleScreen.tscn"
-config/icon="res://icon.png"
+config/icon="res://system/gameicon.png"
 
 [display]
 
