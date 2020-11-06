@@ -52,7 +52,6 @@ func hurt():
 		var dropped_loot = coin_drop.instance()
 		dropped_loot.position = get_global_position() + drop_offset()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
-		i += 1
 	$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
 
 func death():
@@ -62,7 +61,6 @@ func death():
 		var dropped_loot = coin_drop.instance()
 		dropped_loot.position = get_global_position() + drop_offset()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
-		i += 1
 	emit_signal("on_death")
 
 func drop_offset():
