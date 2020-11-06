@@ -1,0 +1,138 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/base_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/button_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://system/instructions_screen/InstructionsPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://system/instructions_screen/InstructionsCopperProjectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://system/instructions_screen/InstructionsBadGuy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://system/instructions_screen/InstructionsScreen.gd" type="Script" id=6]
+[ext_resource path="res://fonts/PennyPitchers.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_top = 4
+font_data = ExtResource( 7 )
+
+[node name="InstructionsScreen" type="ColorRect"]
+margin_right = 320.0
+margin_bottom = 320.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 12
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 12.0
+margin_right = 312.0
+margin_bottom = 316.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 304.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "how to play"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovementLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 304.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 2 )
+text = "wasd = move          , collect        ."
+align = 1
+
+[node name="Player" parent="MarginContainer/VBoxContainer/MovementLabel" instance=ExtResource( 3 )]
+position = Vector2( 152, 4 )
+script = null
+
+[node name="CopperProjectile" parent="MarginContainer/VBoxContainer/MovementLabel" instance=ExtResource( 4 )]
+position = Vector2( 250, 12 )
+
+[node name="ShootLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 88.0
+margin_right = 304.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 2 )
+text = "left mouse button = shoot        ."
+align = 1
+
+[node name="CopperProjectile" parent="MarginContainer/VBoxContainer/ShootLabel" instance=ExtResource( 4 )]
+position = Vector2( 255, 12 )
+
+[node name="EnemyLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 124.0
+margin_right = 304.0
+margin_bottom = 144.0
+custom_fonts/font = ExtResource( 2 )
+text = "hit          and their friends."
+align = 1
+
+[node name="BadGuy" parent="MarginContainer/VBoxContainer/EnemyLabel" instance=ExtResource( 5 )]
+position = Vector2( 92, 4 )
+
+[node name="CoinsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 160.0
+margin_right = 304.0
+margin_bottom = 180.0
+custom_fonts/font = ExtResource( 2 )
+text = "coins are health and ammo"
+align = 1
+
+[node name="CoinsLabel2" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 196.0
+margin_right = 304.0
+margin_bottom = 216.0
+custom_fonts/font = ExtResource( 2 )
+text = "no coins = no health"
+align = 1
+
+[node name="GoodLuckLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 232.0
+margin_right = 304.0
+margin_bottom = 252.0
+custom_fonts/font = ExtResource( 2 )
+text = "good luck"
+align = 1
+
+[node name="PitcherLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 268.0
+margin_right = 304.0
+margin_bottom = 288.0
+custom_fonts/font = ExtResource( 2 )
+text = "~ Pitcher"
+align = 1
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 280.0
+margin_top = 9.0
+margin_right = 304.0
+margin_bottom = 35.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0.301961, 1 )
+text = "X"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="ExitButton" to="." method="_on_ExitButton_button_up"]

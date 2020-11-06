@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/base_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/button_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://system/title_screen/CreditsScreen.gd" type="Script" id=3]
+[ext_resource path="res://fonts/PennyPitchers.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_top = 4
+font_data = ExtResource( 7 )
+
+[node name="CreditsScreen" type="ColorRect"]
+margin_right = 320.0
+margin_bottom = 320.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 12
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 12.0
+margin_right = 312.0
+margin_bottom = 316.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeaderLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 304.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "credits"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameLabel" type="LinkButton" parent="MarginContainer/VBoxContainer"]
+margin_left = 44.0
+margin_top = 52.0
+margin_right = 260.0
+margin_bottom = 72.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 2 )
+text = "a game made by Whyat1872"
+underline = 1
+
+[node name="MusicLabel" type="LinkButton" parent="MarginContainer/VBoxContainer"]
+margin_left = 89.0
+margin_top = 88.0
+margin_right = 215.0
+margin_bottom = 108.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 2 )
+text = "music: Greenjah"
+underline = 1
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 280.0
+margin_top = 9.0
+margin_right = 304.0
+margin_bottom = 35.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0.301961, 1 )
+text = "X"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="MarginContainer/VBoxContainer/GameLabel" to="." method="_on_GameLabel_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/MusicLabel" to="." method="_on_MusicLabel_button_up"]
+[connection signal="button_up" from="ExitButton" to="." method="_on_ExitButton_button_up"]

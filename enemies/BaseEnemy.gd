@@ -5,6 +5,8 @@ signal on_death
 onready var anims_player = $AnimationsPlayer
 onready var fx_player = $EffectsPlayer
 
+onready var interact_audio_player = $InteractAudio2D
+
 onready var enemy_headstack = $EnemyHeadstack
 
 export var kill_speed = 200
@@ -28,7 +30,6 @@ func _ready():
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
 	anims_player.play("moving")
 	fx_player.play("okay")
-	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func _process(delta):
 	velocity = global_position.direction_to(player_ref.global_position)
@@ -41,6 +42,7 @@ func _process(delta):
 	global_position += velocity * speed * delta
 
 func hurt():
+	interact_audio_player.play_audio("hurt")
 	if self.is_in_group("armored"):
 		var anim_position = anims_player.get_current_animation_position()
 		anims_player.play("moving_no_armor")
@@ -49,9 +51,10 @@ func hurt():
 	dropped_loot.position = get_global_position() + drop_offset()
 	get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
 	$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
-	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
 
 func death():
+	$CollisionShape2D.set_deferred("disabled", true)
+	self.visible = false
 	for i in range(0, loot_count):
 		var dropped_loot = coin_drop.instance()
 		dropped_loot.position = get_global_position() + drop_offset()
@@ -70,17 +73,23 @@ func drop_offset():
 	return spawn_pos
 
 func add_coin(value):
-	$InteractAudio2D.play_audio("pickup")
+	interact_audio_player.play_audio("pickup")
 	current_health += value
 	enemy_headstack.update_coin_count(value)
 	enemy_headstack.coin_count = current_health
-	$DebugStatsLabel.update_label(current_health, max_health, loot_count)
+
+func temp_disable():
+	set_process(false)
+	yield(get_tree().create_timer(fx_player.current_animation_length + 0.5), "timeout")
+	if player_ref.is_alive:
+		set_process(true)
 
 func _on_body_entered(body):
 #	print(body.name)
 	if body.is_in_group("player"):
 		if body.can_interact:
 			body.player_hit("enemy")
+			temp_disable()
 	elif body.is_in_group("projectile") and body.can_kill == true and !invincible:
 		if body.linear_velocity.length() >= kill_speed:
 			current_health -= body.value
@@ -88,14 +97,19 @@ func _on_body_entered(body):
 			body.queue_free()
 			if current_health <= 0:
 				death()
+				interact_audio_player.play_audio("death")
+				yield(interact_audio_player, "finished")
 				queue_free()
 			else:
 				invincible = true
 				hurt()
 				fx_player.play("hurt")
+				set_process(false)
 				yield(get_tree().create_timer(fx_player.current_animation_length),"timeout")
+				set_process(true)
 				invincible = false
 				fx_player.play("okay")
 		else:
 			add_coin(body.value)
 			body.queue_free()
+			temp_disable()
