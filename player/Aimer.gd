@@ -24,7 +24,7 @@ func _process(delta):
 				var new_projectile = projectiles[0].instance()
 				new_projectile.position = $Sprite.get_global_position()
 				new_projectile.apply_impulse(Vector2(), Vector2(projectile_speed, 0).rotated(rotation))
-				get_tree().get_root().get_node("World").add_child(new_projectile)
+				get_tree().get_root().get_node("World/Items").add_child(new_projectile)
 				can_fire = false
 				yield(get_tree().create_timer(fire_rate),"timeout")
 				can_fire = true

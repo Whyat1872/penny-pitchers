@@ -25,6 +25,7 @@ var invincible = false
 
 func _ready():
 	connect("on_death", get_tree().get_root().get_node("World/HUD"), "update_kill_count")
+	connect("on_death", get_tree().get_root().get_node("World/EnemySpawnArea"), "enemy_killed")
 	current_health = max_health
 	speed = rand_range(90, 200)
 	player_ref = get_tree().get_root().get_node("World/YSort/Player")
@@ -47,15 +48,17 @@ func hurt():
 		var anim_position = anims_player.get_current_animation_position()
 		anims_player.play("moving_no_armor")
 		anims_player.seek(anim_position, true)
-	var dropped_loot = coin_drop.instance()
-	dropped_loot.position = get_global_position() + drop_offset()
-	get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
+	for i in range(0, 2):
+		var dropped_loot = coin_drop.instance()
+		dropped_loot.position = get_global_position() + drop_offset()
+		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
+		i += 1
 	$EnemyHeadstack.update_coin_count($EnemyHeadstack.coin_count - 1)
 
 func death():
 	$CollisionShape2D.set_deferred("disabled", true)
 	self.visible = false
-	for i in range(0, loot_count):
+	for i in range(0, 2):
 		var dropped_loot = coin_drop.instance()
 		dropped_loot.position = get_global_position() + drop_offset()
 		get_tree().get_root().get_node("World/Items").call_deferred("add_child", dropped_loot)
