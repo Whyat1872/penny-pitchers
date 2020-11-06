@@ -17,6 +17,8 @@ export var slimeguy_interval = 17
 var spawned_enemies = 0
 var spawn_intervals
 
+var t = "test"
+
 func _ready():
 	spawn_intervals = [badguy_interval, bossguy_interval, armorguy_interval, ghostguy_interval, slimeguy_interval]
 
