@@ -15,6 +15,9 @@ var current_coins = 1
 var is_alive = true
 var can_interact = true
 
+var spritesheet_index = 3
+var anim_index = 0
+
 func _ready():
 	connect("player_death", get_tree().get_root().get_node("World/EnemySpawnArea"), "_on_player_death")
 	connect("player_death", get_tree().get_root().get_node("World/YSort"), "_on_player_death")
@@ -25,6 +28,16 @@ func _input(_event):
 	if is_alive:
 		if Input.is_action_just_pressed("restart"):
 			get_tree().reload_current_scene()
+
+func update_anim_region(anim_index):
+	var new_rect = spritesheet_index * 8
+	match anim_index:
+		0:
+			$Sprite.region_rect = Rect2(Vector2(0, new_rect), Vector2(8, 8))
+			anim_index = 1
+		1:
+			$Sprite.region_rect = Rect2(Vector2(8, new_rect), Vector2(8, 8))
+			anim_index = 0
 
 func _physics_process(delta):
 	if is_alive:
