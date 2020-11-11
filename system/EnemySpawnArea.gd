@@ -8,6 +8,8 @@ onready var armorguy = preload("res://enemies/ArmorGuy.tscn")
 onready var ghostguy = preload("res://enemies/GhostGuy.tscn")
 onready var slimeguy = preload("res://enemies/SlimeGuy.tscn")
 
+export var shop_interval = 5 # default is 5
+
 export var badguy_interval = 1
 export var bossguy_interval = 4
 export var armorguy_interval = 6
@@ -20,8 +22,6 @@ var spawn_intervals
 var current_wave = 0
 var current_alive_enemies = 0
 var current_max_enemies = 0
-
-var shop_interval = 2 # default is 5
 
 func _ready():
 	spawn_intervals = [badguy_interval, bossguy_interval, armorguy_interval, ghostguy_interval, slimeguy_interval]

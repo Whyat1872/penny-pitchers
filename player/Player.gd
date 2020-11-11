@@ -52,12 +52,24 @@ func _physics_process(delta):
 			direction += Vector2(1, 0)
 
 		moving_animation_handler(direction)
-		if current_coins > 0:
-			move_and_slide(direction * (speed / current_coins))
+		if current_coins > 1:
+			move_and_slide(direction * (speed / (current_coins * 0.5)))
 		else:
 			move_and_slide(direction * speed)
 	else:
 		anim_player.play("idle")
+
+func player_did_shop(shop_effect_stat, shop_effect_amount):
+	match shop_effect_stat:
+		"throw":
+			get_node("Aimer").projectile_speed += int(shop_effect_amount)
+			print("throw: %s!" % get_node("Aimer").projectile_speed)
+		"move":
+			speed += shop_effect_amount
+			print("speed: %s" % speed)
+		"laser":
+			get_node("Aimer").upgrade_laser(get_node("Aimer").laser_level + int(shop_effect_amount))
+			print("laser: %s" % get_node("Aimer").laser_level)
 
 func add_coin(value):
 	if can_interact:

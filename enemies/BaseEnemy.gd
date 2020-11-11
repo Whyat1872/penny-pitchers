@@ -40,7 +40,10 @@ func _process(delta):
 	else:
 		$Sprite.set_flip_h(false)
 
-	global_position += velocity * speed * delta
+	if enemy_headstack.coin_count > 1:
+		global_position += velocity * (speed / (enemy_headstack.coin_count * 0.5)) * delta
+	else:
+		global_position += velocity * speed * delta
 
 func hurt():
 	interact_audio_player.play_audio("hurt")
@@ -111,6 +114,7 @@ func _on_body_entered(body):
 				invincible = false
 				fx_player.play("okay")
 		else:
-			add_coin(body.value)
-			body.queue_free()
-			temp_disable()
+			if !$EnemyHeadstack.coin_count >= 10:
+				add_coin(body.value)
+				body.queue_free()
+				temp_disable()

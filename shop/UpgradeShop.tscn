@@ -8,7 +8,7 @@
 
 [node name="UpgradeShop" type="Node2D"]
 position = Vector2( 512, 192 )
-z_index = -1
+z_index = 1
 script = ExtResource( 7 )
 
 [node name="ThrowUpgrade" parent="." instance=ExtResource( 2 )]
@@ -36,7 +36,11 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Label"]
+self_modulate = Color( 1, 1, 1, 0.247059 )
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

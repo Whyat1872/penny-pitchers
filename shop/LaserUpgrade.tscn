@@ -5,6 +5,7 @@
 
 [node name="LaserUpgrade" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+upgrade_target = "laser"
 
 [node name="Sprite" parent="." index="1"]
 region_rect = Rect2( 24, 0, 8, 8 )

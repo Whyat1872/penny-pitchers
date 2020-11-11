@@ -9,7 +9,7 @@ radius = 24.0
 [node name="ThrowUpgrade" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 upgrade_target = "throw"
-upgrade_target_value = 2
+upgrade_target_value = 100.0
 
 [node name="Sprite" parent="." index="1"]
 region_rect = Rect2( 8, 0, 8, 8 )
