@@ -4,6 +4,8 @@ export var value = 1
 
 var can_kill = true
 
+var thrower = null
+
 func _physics_process(delta):
 	$Sprite.set_global_rotation(0)
 

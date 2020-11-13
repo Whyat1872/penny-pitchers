@@ -15,7 +15,11 @@ var current_coins = 1
 var is_alive = true
 var can_interact = true
 
+var spritesheet_index = 0
+var anim_index = 0
+
 func _ready():
+	spritesheet_index = PlayerGlobal.player_skin
 	connect("player_death", get_tree().get_root().get_node("World/EnemySpawnArea"), "_on_player_death")
 	connect("player_death", get_tree().get_root().get_node("World/YSort"), "_on_player_death")
 	anim_player.play("idle")
@@ -24,7 +28,17 @@ func _ready():
 func _input(_event):
 	if is_alive:
 		if Input.is_action_just_pressed("restart"):
-			get_tree().reload_current_scene()
+			get_tree().change_scene("res://system/title_screen/TitleScreen.tscn")
+
+func update_anim_region(anim_index):
+	var new_rect = spritesheet_index * 8
+	match anim_index:
+		0:
+			$Sprite.region_rect = Rect2(Vector2(0, new_rect), Vector2(8, 8))
+			anim_index = 1
+		1:
+			$Sprite.region_rect = Rect2(Vector2(8, new_rect), Vector2(8, 8))
+			anim_index = 0
 
 func _physics_process(delta):
 	if is_alive:
@@ -39,12 +53,24 @@ func _physics_process(delta):
 			direction += Vector2(1, 0)
 
 		moving_animation_handler(direction)
-		if current_coins > 0:
-			move_and_slide(direction * (speed / current_coins))
+		if current_coins > 1:
+			move_and_slide(direction * (speed / (current_coins * 0.5)))
 		else:
 			move_and_slide(direction * speed)
 	else:
 		anim_player.play("idle")
+
+func player_did_shop(shop_effect_stat, shop_effect_amount):
+	match shop_effect_stat:
+		"throw":
+			get_node("Aimer").projectile_speed += int(shop_effect_amount)
+			print("throw: %s!" % get_node("Aimer").projectile_speed)
+		"move":
+			speed += shop_effect_amount
+			print("speed: %s" % speed)
+		"laser":
+			get_node("Aimer").upgrade_laser(get_node("Aimer").laser_level + int(shop_effect_amount))
+			print("laser: %s" % get_node("Aimer").laser_level)
 
 func add_coin(value):
 	if can_interact:

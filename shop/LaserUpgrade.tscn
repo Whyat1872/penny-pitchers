@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shop/BaseShopItem.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shop/LaserUpgrade.gd" type="Script" id=2]
+
+[node name="LaserUpgrade" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+upgrade_target = "laser"
+
+[node name="Sprite" parent="." index="1"]
+region_rect = Rect2( 24, 0, 8, 8 )
+
+[node name="Label" parent="." index="3"]
+text = "laser sight"

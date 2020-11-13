@@ -19,6 +19,10 @@ config/name="Penny Pitcher"
 run/main_scene="res://system/title_screen/TitleScreen.tscn"
 config/icon="res://system/gameicon.png"
 
+[autoload]
+
+PlayerGlobal="*res://player/PlayerGlobal.gd"
+
 [display]
 
 window/stretch/mode="2d"

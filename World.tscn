@@ -18,7 +18,7 @@ extents = Vector2( 360, 32 )
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -56, -56, 0, 0, 0, 0, 1080, -56, 0, 0, 0, 0, 1080, 656, 0, 0, 0, 0, -56, 656, 0, 0, 0, 0, -56, -56 )
+"points": PoolVector2Array( 0, 0, 0, 0, -56, 64, 0, 0, 0, 0, -56, 656, 0, 0, 0, 0, 1080, 656, 0, 0, 0, 0, 1080, 64 )
 }
 
 [node name="World" type="Node"]
@@ -37,24 +37,6 @@ position = Vector2( 512, 320 )
 [node name="CopperProjectile" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 576, 320 )
 
-[node name="CopperProjectile2" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 512, 384 )
-
-[node name="CopperProjectile3" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 512, 256 )
-
-[node name="CopperProjectile5" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 544, 288 )
-
-[node name="CopperProjectile6" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 480, 288 )
-
-[node name="CopperProjectile7" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 544, 352 )
-
-[node name="CopperProjectile8" parent="Items" instance=ExtResource( 2 )]
-position = Vector2( 480, 352 )
-
 [node name="CopperProjectile4" parent="Items" instance=ExtResource( 2 )]
 position = Vector2( 448, 320 )
 
@@ -70,6 +52,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/Top"]
+position = Vector2( -3.05176e-05, -8 )
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="WorldBounds/Top"]
@@ -148,15 +131,11 @@ __meta__ = {
 [node name="EnemySpawnArea" type="Path2D" parent="."]
 curve = SubResource( 3 )
 script = ExtResource( 4 )
-armorguy_interval = 5
+shop_interval = 2
 
 [node name="EnemySpawnSpot" type="PathFollow2D" parent="EnemySpawnArea"]
-position = Vector2( -56, -56 )
-rotation = 9.75007e-07
-
-[node name="SpawnTimer" type="Timer" parent="EnemySpawnArea"]
-wait_time = 2.5
-autostart = true
+position = Vector2( -56, 64 )
+rotation = 1.5708
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 7 )
@@ -180,4 +159,3 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 9 )
 autoplay = true
-[connection signal="timeout" from="EnemySpawnArea/SpawnTimer" to="EnemySpawnArea" method="_on_SpawnTimer_timeout"]
