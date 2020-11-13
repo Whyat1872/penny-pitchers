@@ -15,10 +15,11 @@ var current_coins = 1
 var is_alive = true
 var can_interact = true
 
-var spritesheet_index = 3
+var spritesheet_index = 0
 var anim_index = 0
 
 func _ready():
+	spritesheet_index = PlayerGlobal.player_skin
 	connect("player_death", get_tree().get_root().get_node("World/EnemySpawnArea"), "_on_player_death")
 	connect("player_death", get_tree().get_root().get_node("World/YSort"), "_on_player_death")
 	anim_player.play("idle")
@@ -27,7 +28,7 @@ func _ready():
 func _input(_event):
 	if is_alive:
 		if Input.is_action_just_pressed("restart"):
-			get_tree().reload_current_scene()
+			get_tree().change_scene("res://system/title_screen/TitleScreen.tscn")
 
 func update_anim_region(anim_index):
 	var new_rect = spritesheet_index * 8

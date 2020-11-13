@@ -7,7 +7,6 @@
 [ext_resource path="res://shop/UpgradeShop.gd" type="Script" id=7]
 
 [node name="UpgradeShop" type="Node2D"]
-position = Vector2( 512, 192 )
 z_index = 1
 script = ExtResource( 7 )
 
@@ -24,14 +23,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -88.0
+margin_left = -105.0
 margin_top = 64.0
-margin_right = 88.0
-margin_bottom = 88.0
+margin_right = 105.0
+margin_bottom = 107.0
 custom_fonts/font = ExtResource( 4 )
-text = "choose one upgrade"
+text = "have an upgrade
+(touch or shoot to collect)"
 align = 1
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 

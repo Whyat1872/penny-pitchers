@@ -5,6 +5,7 @@ signal shop_closed
 onready var player_ref = get_parent().get_node("YSort/Player")
 
 func _ready():
+	position = Vector2(512, 192)
 	for child in get_children():
 		if child.has_node("CollisionShape2D"):
 			child.anim_player.play("idle")

@@ -150,7 +150,7 @@ anims/idle = SubResource( 2 )
 anims/running = SubResource( 3 )
 
 [node name="HeadStack" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -8 )
 
 [node name="Aimer" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 6 )
